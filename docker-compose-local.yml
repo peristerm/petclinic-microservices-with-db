@@ -2,14 +2,14 @@ version: '2'
 
 services: 
   config-server:
-    image: springcommunity/spring-petclinic-admin-server:java11
+    image: petclinic-config-server:dev
     container_name: config-server
     mem_limit: 512M
     ports: 
       - 8888:8888
 
   discovery-server:
-    image: springcommunity/spring-petclinic-discovery-server:java11
+    image: petclinic-discovery-server:dev
     container_name: discovery-server
     mem_limit: 512M
     ports: 
@@ -19,7 +19,7 @@ services:
     entrypoint: ["./dockerize", "-wait=tcp://config-server:8888", "-timeout=160s", "--", "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
   customers-service:
-    image: springcommunity/spring-petclinic-customers-service:java11
+    image: petclinic-customers-service:dev
     container_name: customers-service
     mem_limit: 512M
     ports:
@@ -30,7 +30,7 @@ services:
     entrypoint: ["./dockerize", "-wait=tcp://discovery-server:8761", "-timeout=160s", "--", "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar" ]
   
   visits-service:
-    image: springcommunity/spring-petclinic-visits-service:java11
+    image: petclinic-visits-service:dev
     container_name: visits-service
     mem_limit: 512M
     ports:
@@ -41,7 +41,7 @@ services:
     entrypoint: ["./dockerize", "-wait=tcp://discovery-server:8761", "-timeout=160s", "--", "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar" ]
   
   vets-service:
-    image: springcommunity/spring-petclinic-vets-service:java11
+    image: petclinic-vets-service:dev
     container_name: vets-service
     mem_limit: 512M
     ports:
@@ -52,7 +52,7 @@ services:
     entrypoint: ["./dockerize", "-wait=tcp://discovery-server:8761", "-timeout=160s", "--", "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar" ]
   
   api-gateway:
-    image: springcommunity/spring-petclinic-api-gateway:java11
+    image: petclinic-api-gateway:dev
     container_name: api-gateway
     mem_limit: 512M
     ports:
@@ -63,7 +63,7 @@ services:
     entrypoint: ["./dockerize", "-wait=tcp://discovery-server:8761", "-timeout=160s", "--", "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar" ]
   
   admin-server:
-    image: springcommunity/spring-petclinic-admin-server:java11
+    image: petclinic-admin-server:dev
     container_name: admin-server
     mem_limit: 512M
     ports:
@@ -74,7 +74,7 @@ services:
     entrypoint: ["./dockerize", "-wait=tcp://discovery-server:8761", "-timeout=160s", "--", "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar" ]
 
   hystrix-dashboard:
-    image: springcommunity/spring-petclinic-hystrix-dashboard:java11
+    image: petclinic-hystrix-dashboard:dev
     container_name: hystrix-dashboard
     mem_limit: 512M
     ports:
